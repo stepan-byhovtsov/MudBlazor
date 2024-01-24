@@ -12,6 +12,8 @@ namespace MudBlazor
     {
         private readonly string _mudPickerCalendarContentElementId;
         private bool _dateFormatTouched;
+        
+        protected  int _monthPickerIndex = -1;
 
         protected MudBaseDatePicker() : base(new DefaultConverter<DateTime?>
         {
@@ -391,6 +393,16 @@ namespace MudBlazor
         {
             CurrentView = OpenTo.Month;
             _picker_month = _picker_month?.AddMonths(month);
+            StateHasChanged();
+        }
+
+        /// <summary>
+        /// user clicked on a month
+        /// </summary>
+        protected virtual void OnMonthInHeaderClicked(int month)
+        {
+            CurrentView = OpenTo.Month;
+            _monthPickerIndex = month;
             StateHasChanged();
         }
 
